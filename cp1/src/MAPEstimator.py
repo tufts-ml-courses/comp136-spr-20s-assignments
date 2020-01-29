@@ -32,7 +32,7 @@ class MAPEstimator():
     >>> word_list = ['dinosaur', 'trex', 'dinosaur', 'stegosaurus']
     >>> mapEst = MAPEstimator(Vocabulary(word_list), alpha=2.0)
     >>> mapEst.fit(word_list)
-    >>> np.allclose(mapEst.predict_proba('dinosaur'), 2.0/7.0)
+    >>> np.allclose(mapEst.predict_proba('dinosaur'), 3.0/7.0)
     True
 
     >>> mapEst.predict_proba('never_seen-before')
