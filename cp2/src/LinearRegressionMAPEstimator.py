@@ -85,8 +85,19 @@ class LinearRegressionMAPEstimator():
         return self
 
     def fit(self, x_ND, t_N):
+        ''' Fit this estimator to provided training data
 
+        Args
+        ----
+        x_ND : 2D array, shpae (N, D)
+            Features
+        t_N : 1D array, shape (N,)
+            Outputs
 
+        Returns
+        -------
+        self. Internal attributes updated.
+        '''
         M = self.feature_transformer.get_feature_size() # num features
         Phi_NM = self.feature_transformer.transform(x_ND)
         ## TODO update w_map_M attribute via formulas from Bishop
