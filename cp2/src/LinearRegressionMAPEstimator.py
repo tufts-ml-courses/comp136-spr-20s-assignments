@@ -46,9 +46,12 @@ class LinearRegressionMAPEstimator():
     >>> beta = 20.0
     >>> map = LinearRegressionMAPEstimator(txfm, alpha, beta)
     >>> map = map.fit(x_ND, t_N)
+    >>> map.w_map_M.shape
+    (2,)
     >>> map.w_map_M
-    array([0., 0.])
-
+    array([0.99964554, 4.99756957])
+    >>> txfm.get_feature_names()
+    ['bias', 'x 0^1']
     """
 
     def __init__(self, feature_transformer=None, alpha=1.0, beta=1.0):
@@ -82,19 +85,8 @@ class LinearRegressionMAPEstimator():
         return self
 
     def fit(self, x_ND, t_N):
-        ''' Fit this estimator to provided training data
 
-        Args
-        ----
-        x_ND : 2D array, shpae (N, D)
-            Features
-        t_N : 1D array, shape (N,)
-            Outputs
 
-        Returns
-        -------
-        self. Internal attributes updated.
-        '''
         M = self.feature_transformer.get_feature_size() # num features
         Phi_NM = self.feature_transformer.transform(x_ND)
         ## TODO update w_map_M attribute via formulas from Bishop
@@ -136,3 +128,13 @@ class LinearRegressionMAPEstimator():
         total_log_proba = scipy.stats.norm.logpdf(
             t_N, mean_N, 1.0/np.sqrt(self.beta))
         return np.sum(total_log_proba) / N
+
+
+
+
+
+
+
+
+
+

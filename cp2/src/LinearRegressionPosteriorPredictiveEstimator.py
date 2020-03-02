@@ -46,10 +46,15 @@ class LinearRegressionPosteriorPredictiveEstimator():
     >>> beta = 20.0
     >>> ppe = LinearRegressionPosteriorPredictiveEstimator(txfm, alpha, beta)
     >>> ppe = ppe.fit(x_ND, t_N)
+    >>> ppe.mean_M.shape
+    (2,)
     >>> ppe.mean_M
-    array([0., 0.])
-    >>> ppe.fit_and_calc_log_evidence(x_ND, t_N)
-    0.0
+    array([0.99964554, 4.99756957])
+    >>> log_ev = ppe.fit_and_calc_log_evidence(x_ND, t_N)
+    >>> isinstance(log_ev, float)
+    True
+    >>> np.round(log_ev, 5)
+    -5076627.53371
     """
 
     def __init__(self, feature_transformer, alpha=1.0, beta=1.0):
@@ -58,6 +63,7 @@ class LinearRegressionPosteriorPredictiveEstimator():
         self.beta = float(beta)
 
         self.M = self.feature_transformer.get_feature_size() # num features
+
 
     def fit(self, x_ND, t_N):
         ''' Fit this estimator to provided training data
@@ -173,7 +179,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         >>> beta = 1.0
         >>> ppe = LinearRegressionPosteriorPredictiveEstimator(txfm, alpha, beta)
         >>> log_ev = ppe.fit_and_calc_log_evidence(x0, 0.0)
-        
+        >>> np.round(log_ev, 5)
+        -1.265512
         '''
         ## Fit posterior to the data
         self.fit(x_ND, t_N)
