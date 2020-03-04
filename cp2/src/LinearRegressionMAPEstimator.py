@@ -37,7 +37,9 @@ class LinearRegressionMAPEstimator():
     >>> N, D = 100, 1
     >>> prng = np.random.RandomState(0)
     >>> x_ND = prng.randn(N, D)
-    >>> t_N = 5 * x_ND + 1
+    >>> t_N = 5 * x_ND[:,0] + 1
+    >>> t_N.shape == (N,)
+    True
 
     >>> from FeatureTransformPolynomial import PolynomialFeatureTransform
     >>> txfm = PolynomialFeatureTransform(order=1, input_dim=D)
@@ -90,9 +92,10 @@ class LinearRegressionMAPEstimator():
         Args
         ----
         x_ND : 2D array, shpae (N, D)
-            Features
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
         t_N : 1D array, shape (N,)
-            Outputs
+            Outputs for regression
 
         Returns
         -------
@@ -111,7 +114,8 @@ class LinearRegressionMAPEstimator():
         Args
         ----
         x_ND : 2D array, shape (N, D)
-            Each row is a feature vector of size D (D is same as input_dim)
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
 
         Returns
         -------
@@ -129,6 +133,14 @@ class LinearRegressionMAPEstimator():
     
         Assumes w is set to MAP value (internal attribute).
         Assumes Normal iid likelihood with precision \beta.
+
+        Args
+        ----
+        x_ND : 2D array, shape (N, D)
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
+        t_N : 1D array, shape (N,)
+            Outputs for regression
 
         Returns
         -------

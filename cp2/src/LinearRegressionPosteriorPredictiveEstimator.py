@@ -37,7 +37,12 @@ class LinearRegressionPosteriorPredictiveEstimator():
     >>> N, D = 100, 1
     >>> prng = np.random.RandomState(0)
     >>> x_ND = prng.randn(N, D)
-    >>> t_N = 5 * x_ND + 1
+    >>> x_ND.shape == (N, D)
+    True
+
+    >>> t_N = 5 * x_ND[:,0] + 1
+    >>> t_N.shape == (N,)
+    True
 
     >>> from FeatureTransformPolynomial import PolynomialFeatureTransform
     >>> txfm = PolynomialFeatureTransform(order=1, input_dim=D)
@@ -50,11 +55,13 @@ class LinearRegressionPosteriorPredictiveEstimator():
     (2,)
     >>> ppe.mean_M
     array([0.99964554, 4.99756957])
+
+    ## Check log evidence
     >>> log_ev = ppe.fit_and_calc_log_evidence(x_ND, t_N)
     >>> isinstance(log_ev, float)
     True
     >>> np.round(log_ev, 5)
-    -5076627.53371
+    37.28976
     """
 
     def __init__(self, feature_transformer, alpha=1.0, beta=1.0):
@@ -71,7 +78,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         Args
         ----
         x_ND : 2D array, shpae (N, D)
-            Features
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
         t_N : 1D array, shape (N,)
             Outputs
 
@@ -91,7 +99,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         Args
         ----
         x_ND : 2D array, shape (N, D)
-            Each row is a 'raw' feature vector of size D (D is same as self.input_dim)
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
 
         Returns
         -------
@@ -110,7 +119,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         Args
         ----
         x_ND : 2D array, shape (N, D)
-            Each row is a 'raw' feature vector of size D (D is same as input_dim)
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
 
         Returns
         -------
@@ -126,12 +136,13 @@ class LinearRegressionPosteriorPredictiveEstimator():
     def score(self, x_ND, t_N):
         ''' Compute the average log probability of provided dataset
 
-        Assumes we will AVERAGE over the posterior distribution on w.
+        Assumes we will AVERAGE over the posterior distribution on w computed by this estimator.
 
         Args
         ----
         x_ND : 2D array, shpae (N, D)
-            Features
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
         t_N : 1D array, shape (N,)
             Outputs
 
@@ -159,7 +170,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         Args
         ----
         x_ND : 2D array, shpae (N, D)
-            Features
+            Each row is a 'raw' feature vector of size D
+            D is same as self.feature_transformer.input_dim
         t_N : 1D array, shape (N,)
             Outputs
 
@@ -178,8 +190,8 @@ class LinearRegressionPosteriorPredictiveEstimator():
         >>> alpha = 1.0
         >>> beta = 1.0
         >>> ppe = LinearRegressionPosteriorPredictiveEstimator(txfm, alpha, beta)
-        >>> log_ev = ppe.fit_and_calc_log_evidence(x0, 0.0)
-        >>> np.round(log_ev, 5)
+        >>> log_ev = ppe.fit_and_calc_log_evidence(x0, np.asarray([0.0]))
+        >>> np.round(log_ev, 6)
         -1.265512
         '''
         ## Fit posterior to the data
