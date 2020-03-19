@@ -1,0 +1,144 @@
+\documentclass[10pt]{article}
+\usepackage{fullpage} 
+\usepackage{microtype}      % microtypography
+\usepackage{array}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+
+%% Header
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[C]{COMP 136 - 2020s - HW3}
+\fancyfoot[C]{\thepage} % page number
+\renewcommand\headrulewidth{0pt}
+\pagestyle{fancy}
+
+%% Hyperlinks always blue, no weird boxes
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true,allcolors=black,pdfborder={0 0 0}]{hyperref}
+
+%%% Doc layout
+\usepackage{parskip}
+\usepackage{times}
+
+%%% Write out problem statements in blue, solutions in black
+\usepackage{color}
+\newcommand{\officialdirections}[1]{{\color{blue} #1}}
+
+%%% Avoid automatic section numbers (we'll provide our own)
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+~~\\ %% add vert space
+\Large{\bf Student Name: TODO}
+
+\Large{\bf Collaboration Statement:}
+
+Total hours spent: TODO hours
+
+I consulted the following resources:
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+\tableofcontents
+
+\newpage
+\officialdirections{
+\subsection*{1a: Problem Statement}
+Prove that the mean of vector $x$ under the mixture distribution is given by:
+\begin{align}
+\mathbb{E}_{p^{\text{mix}}(x)}[x] = \sum_{k=1}^K \pi_k \mu_k
+\end{align}
+}
+
+\subsection{1a: Solution}
+
+TODO
+
+\newpage
+\officialdirections{
+\subsection*{1b: Problem Statement}
+Prove that the covariance of vector $x$ under the mixture distribution is given by:
+\begin{align}
+\text{Cov}_{p^{\text{mix}}(x)}[x] = \sum_{k=1}^K \pi_k (\Sigma_k + \mu_k \mu_k^T ) - \mathbb{E}_{p^{\text{mix}(x)}}[x] \mathbb{E}_{p^{\text{mix}(x)}}[x]^T
+\end{align}
+}
+\subsection{1b: Solution}
+
+TODO
+
+
+\newpage
+
+\officialdirections{
+\subsection*{2a: Problem Statement}
+Consider a discrete random variable $z$ with $K$ possible values, represented as a one-hot vector of size $K$. Let the PMF of this variable be: $q(z) = \prod_{k=1}^K r_k^{z_k}$, where parameter $r \in \Delta^K$ is a probability vector of size $K$ that sums to one.
+
+Compute the entropy of this distribution:
+\begin{align}
+\mathbb{H}[q] = \mathbb{E}_{q(z)}[ - \log q(z) ]
+\end{align}
+}
+\subsection{2a: Solution}
+
+TODO
+
+
+\officialdirections{
+\subsection*{2b: Problem Statement}
+What is the largest possible entropy for a discrete r.v. of size $K$? The smallest? What value of parameter vector $r$ produces each one?
+}
+
+\subsection{2b: Solution}
+
+TODO
+
+
+\newpage
+\officialdirections{
+\subsection*{2c: Problem Statement}
+Given the joint $p(x,z)$, show that the following inequality holds for any distribution $q(z)$ that puts some probability mass everywhere (i.e. $q(z) > 0$ for all $z$):
+\begin{align}
+\log p(x) = \log \sum_z p(x,z) \geq \mathbb{E}_{q} \big[ \log p(x, z) - \log q(z) \big]
+\end{align}
+}
+
+\subsection{2c: Solution}
+
+TODO
+
+
+\newpage
+\officialdirections{
+\subsection*{3a: Problem Statement}
+Rewrite the M-step update equation for $\mu_k$ in (Bishop PRML Eq. 9.24) in terms of the summaries $N_k, S_k, T_k$ above.
+}
+
+\subsection{3a: Solution}
+
+TODO
+
+
+
+\officialdirections{
+\subsection*{3b: Problem Statement}
+Rewrite the M-step update equation for $\Sigma_k$ in (Bishop PRML Eq. 9.24) in terms of the summaries $N_k, S_k, T_k$ above.
+}
+
+\subsection{3b: Solution}
+
+TODO
+
+
+\newpage
+\officialdirections{
+\subsection*{3c: Problem Statement}
+Rewrite the optimization objective above $\mathcal{L}$ as a different function $\mathcal{J}$, which takes as input not the data and responsibilities $x_n$ and $\gamma_n$ for each example (indexed by $n$), but instead the summary statistics $N, S, T,$ and $H$ defined above.
+}
+
+\subsection{3c: Solution}
+
+TODO
+
+\end{document}
