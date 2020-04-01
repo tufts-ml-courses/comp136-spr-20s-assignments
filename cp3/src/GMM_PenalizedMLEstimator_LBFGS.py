@@ -526,8 +526,6 @@ class GMM_PenalizedMLEstimator_LBFGS():
         optimal_param_vec = result.x
         self.log_pi_K, self.mu_KD, self.stddev_KD = self.to_common_parameters_from_flat_array(optimal_param_vec)
 
-
-
     def write_history_to_csv(self, csv_path):
         ''' Write history of training to comma separated value (CSV) file
 
@@ -545,6 +543,7 @@ class GMM_PenalizedMLEstimator_LBFGS():
         None.
         '''
         df = pd.DataFrame()
-        for key in self.history:
-            df[key] = self.history[key]
+        cur_list = self.history[key]
+        if df.shape[0] == 0 or df.shape[0] == len(cur_list):
+            df[key] = cur_list
         df.to_csv(csv_path, index=False)

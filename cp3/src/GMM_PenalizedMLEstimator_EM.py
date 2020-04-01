@@ -300,7 +300,7 @@ class GMM_PenalizedMLEstimator_EM(GMM_PenalizedMLEstimator_LBFGS):
                 # Verify the loss goes down after the M step
                 loss_m = self.calc_EM_loss(r_NK, x_ND)
                 self.history['train_loss_em'].append(loss_m)
-                ## TODO this should pass: assert loss_m + 1e-9 <= loss_e
+                ## TODO this should pass: assert loss_m <= loss_e + 1e-9 (UPDATED 2020-04-01)
 
             if verbose:
                 print("iter %4d / %4d after %9.1f sec | train loss % 9.6f %s" % (
