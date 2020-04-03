@@ -543,7 +543,12 @@ class GMM_PenalizedMLEstimator_LBFGS():
         None.
         '''
         df = pd.DataFrame()
-        cur_list = self.history[key]
-        if df.shape[0] == 0 or df.shape[0] == len(cur_list):
-            df[key] = cur_list
+        for key in self.history:
+            cur_list = self.history[key]
+            if df.shape[0] == 0 or df.shape[0] == len(cur_list):
+                df[key] = cur_list
         df.to_csv(csv_path, index=False)
+
+
+
+        
