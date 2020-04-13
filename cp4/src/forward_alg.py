@@ -126,9 +126,12 @@ def run_forward_algorithm(log_pi_K, log_A_KK, log_lik_TK):
 	alpha_TK = np.zeros((T,K))
 
 	# TODO base case update at t=0
+	log_pdf_x_1toT += 0.0
+	alpha_TK[0, :] = 0.0
 
 	for t in range(1, T):
 		# TODO recursive update for t=1, ... T-1
+		log_pdf_x_1toT += 0.0
 		alpha_TK[t, :] = 0.0
 
 	return alpha_TK, log_pdf_x_1toT
